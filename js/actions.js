@@ -1,9 +1,9 @@
 var optioncounter = 2;
-var questioncounter = 1;
+//var questioncounter = 1;
 
 function addOption(){
 	optioncounter++;
-	htmltoadd = "<br>Option " + optioncounter + ": <input type='text' name='question" + questioncounter + "option' />";
+	htmltoadd = "<br>Option " + optioncounter + ": <input type='text' name='option" + optioncounter + "' />";
 	document.getElementById('options1').innerHTML += htmltoadd;
 }
 

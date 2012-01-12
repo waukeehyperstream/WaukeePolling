@@ -44,7 +44,8 @@ Password:<input type="password" name="password2" />
 <br />
 <a href="php/makepoll.php">Make me a poll</a>
 <br />
-<a href="?page=loadpolls">Load the polls</a>
+<a href="php/loadpolls.php">Load the polls</a>
+
 <div id="pagestuff">
 <?php
 
