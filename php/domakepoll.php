@@ -1,5 +1,9 @@
 <?php
 session_start();
+$username = $_SESSION['username'];
+$rank = $_SESSION['rank'];
+echo $rank + "<br>";
+if(($rank == 'admin') || ($rank == 'teacher')){
 
 include '../db/connection.php';
 $collection = $db->polls;
@@ -10,6 +14,7 @@ $name = $_POST["pollname"];
 $questionname = $_POST["question1"];
 
 $optionarray = array();
+$questionarray = array();
 $almostfinalarray = array();
 $finalarray = array();
 
@@ -19,17 +24,23 @@ echo $key;
 	echo $isgood;
 	if ($isgood == "option"){
 		echo 'fun';
-		$thisoptionarray = array($_POST[$key] => 0);
+		$thisoptionarray = array("optionname" => $_POST[$key], "votes" => 0);
 		array_push($optionarray, $thisoptionarray);
 	}
 }
 echo "<br>";
 
-$almostfinalarray["questionname"] = $questionname;
-$almostfinalarray["options"] = $optionarray;
+$questionarray["questionnumber"] = 1;
+$questionarray["questionname"] = $questionname;
+$questionarray["options"] = $optionarray;
 
+array_push($almostfinalarray, $questionarray);
+
+$finalarray["creator"] = $username;
+$finalarray["created_at"] = time();
 $finalarray["name"] = $name;
-$finalarray["question1"] = $almostfinalarray;
+$finalarray["questions"] = $almostfinalarray;
+$finalarray["key"] = "stuff";
 
 var_dump($finalarray);
 
@@ -40,12 +51,18 @@ if($insert){
 	echo "FAILED.";
 }
 
-
+}else{
+	echo "Sorry, at this time, only teachers can make polls.";
+}
 
 
 ?>
 
-
+<html>
+<head>
+<meta http-equiv="refresh" content="1;url=http://localhost/WaukeePolling/index.php">
+</head>
+</html>
 
 
 

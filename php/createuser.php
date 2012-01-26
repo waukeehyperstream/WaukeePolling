@@ -13,7 +13,7 @@ $password = $_POST['password'];
 $salt = 'imagoofygooberyeah5';
 $encryptedpassword = md5($password . $salt);
 
-$userarray = array("username" => $username, "password" => $encryptedpassword);
+$userarray = array("username" => $username, "password" => $encryptedpassword, "rank" => "student");
 
 $filter = array("username" => $username);
 $foundone = $collection->findOne($filter);
