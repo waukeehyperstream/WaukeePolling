@@ -9,6 +9,7 @@ include '../db/connection.php';
 $collection = $db->polls;
 
 $arrayofdata = $_POST;
+$optioncount = 1;
 
 $name = $_POST["pollname"];
 $questionname = $_POST["question1"];
@@ -20,12 +21,13 @@ $finalarray = array();
 
 foreach ($_POST as $key => $var){
 echo $key;
-	$isgood = substr($key,0,6);
+	$isgood = substr($key,0,6); //pulls string out of key string, looking for 'option'.
 	echo $isgood;
 	if ($isgood == "option"){
 		echo 'fun';
-		$thisoptionarray = array("optionname" => $_POST[$key], "votes" => 0);
+		$thisoptionarray = array("optionname" => $_POST[$key], "optionnumber" => $optioncount,"votes" => 0);
 		array_push($optionarray, $thisoptionarray);
+		$optioncount++;
 	}
 }
 echo "<br>";
